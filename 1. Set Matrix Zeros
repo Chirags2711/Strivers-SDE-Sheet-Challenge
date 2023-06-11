@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+    public static void setZeros(int matrix[][]) {
+        // Write your code here..
+        HashSet<Integer> setI=new HashSet<>();
+        HashSet<Integer> setJ=new HashSet<>();
+        int m=matrix.length;
+        int n=matrix[0].length;
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n;j++){
+                if(matrix[i][j]==0){
+                    setI.add(i);
+                    setJ.add(j);
+                }
+            }
+        }
+        for(int i: setI){
+            for(int j=0;j<n;j++){
+                matrix[i][j]=0;
+            }
+        }
+        for(int j: setJ){
+            for(int i=0;i<m;i++){
+                matrix[i][j]=0;
+            }
+        }
+    }
+}
