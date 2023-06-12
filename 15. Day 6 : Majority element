@@ -17,3 +17,34 @@ public class Solution {
         return -1;
 	}
 }
+
+
+//Space complexity O(1) approach:
+
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+	public static int findMajority(int[] arr, int n) {
+        int C=arr[0], V=1;
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]==C){
+                V++;
+            }else{
+                V--;
+                if(V==0){
+                    C=arr[i];
+                    V=1;
+                }
+            }
+        }
+        int count=0;
+        for(int i:arr){
+            if(i==C){
+                count++;
+            }
+        }
+        if(count>n/2) return C;
+        return -1;
+	}
+}
