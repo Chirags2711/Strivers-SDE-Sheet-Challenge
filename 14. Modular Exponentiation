@@ -1,0 +1,16 @@
+
+
+public class Solution {
+    public static int modularExponentiation(int x, int n, int m) {
+        long answer = 1;
+        long tempX = x;
+        while (n > 0) {
+            if ((n & 1) == 1) {
+                answer = (answer * tempX) % m;
+            }
+            tempX = (tempX * tempX) % m;
+            n >>= 1;
+        }
+        return (int) (answer);
+    }
+}
