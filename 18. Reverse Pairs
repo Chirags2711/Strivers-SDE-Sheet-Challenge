@@ -1,0 +1,51 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static int reversePairs(ArrayList<Integer> arr) 
+    {
+        // Write your code here.
+        return mergeSort(arr, 0, arr.size()-1);
+    }
+    private static int mergeSort(ArrayList<Integer> arr, int low, int high){
+        if(low>=high){
+            return 0;
+        }
+        int mid=(low+high)/2;
+        int cnt=mergeSort(arr, low, mid);
+        cnt+=mergeSort(arr, mid+1, high);
+        cnt+=merge(arr, low, mid, high);
+        return cnt;
+    }
+    private static int merge(ArrayList<Integer> arr, int low, int mid, int high){
+        int j=mid+1, cnt=0;
+        for(int i=low;i<=mid;i++){
+            while(j<=high && arr.get(i)> 2 * arr.get(j)){
+            j++;
+            }
+            cnt += j-(mid+1);
+        }
+        
+        ArrayList<Integer>temp =new ArrayList<>();
+        int left=low, right=mid+1;
+        while(left<=mid && right<=high){
+            if(arr.get(left)>arr.get(right)){
+                temp.add(arr.get(right++));
+            }else{
+                temp.add(arr.get(left++));
+            }
+        }
+        while(left<=mid){
+            temp.add(arr.get(left++));
+        }
+        while(right<=high){
+            temp.add(arr.get(right++));
+        }
+        for(int k=high;k>=low;k--){
+            arr.set(k, temp.remove(temp.size()-1));
+        }
+        return cnt;
+    }
+}
