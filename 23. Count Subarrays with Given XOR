@@ -1,0 +1,27 @@
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution {
+	public static int subarraysXor(ArrayList<Integer> arr, int x) {
+		int cnt=0;
+		int xor=0;
+		HashMap<Integer, Integer> freq=new HashMap<>();
+		for(int i=0;i<arr.size();i++){
+			xor ^= arr.get(i);
+			if(xor==x){
+				cnt++;
+			}
+			if(freq.containsKey(xor^x)){
+				cnt+=freq.get(xor^x);
+			}
+			if(freq.containsKey(xor)){
+				freq.put(xor, freq.get(xor)+1);
+			}else{
+				freq.put(xor, 1);
+			}
+		}
+		return cnt;
+	}
+}
